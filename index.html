@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تولید تینت و شید رنگ</title>
+    <title>تولید تانت و شید رنگ</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>تولید تینت و شید رنگ</h1>
+        <h1>تولید تانت و شید رنگ</h1>
         <form id="colorForm">
             <label>
                 کد رنگ HEX (بدون #):
                 <input type="text" id="hexColor" maxlength="6" required placeholder="مثلاً FF5733">
             </label>
             <label>
-                تعداد تینت‌ها:
+                تعداد تانت‌ها:
                 <input type="number" id="tints" min="1" max="10" value="5" required>
             </label>
             <label>
                 تعداد شید‌ها:
                 <input type="number" id="shades" min="1" max="10" value="5" required>
             </label>
-            <button type="submit">✍ تولید کن </button>
+            <button type="submit">تولید رنگ‌ها</button>
         </form>
 
         <div class="colors-container" id="colorsContainer">
-            <!-- رنگ‌های تولید شده در اینجا نمایش داده می‌شوند -->
+            <!-- رنگ‌های تولید شده در قالب کارت نمایش داده می‌شوند -->
         </div>
     </div>
     <script src="script.js"></script>
