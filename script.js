@@ -138,7 +138,6 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
 const hexInputField = document.getElementById('hexColor');
 const colorPicker = document.getElementById('colorPicker');
 
-// به‌روزرسانی پالت رنگی وقتی که HEX تغییر می‌کند
 hexInputField.addEventListener('input', function() {
     const hex = hexInputField.value.trim();
     if (isValidHex(hex)) {
@@ -146,8 +145,7 @@ hexInputField.addEventListener('input', function() {
     }
 });
 
-// به‌روزرسانی HEX وقتی که رنگ از پالت انتخاب می‌شود
 colorPicker.addEventListener('input', function() {
-    const hex = colorPicker.value.slice(1); // حذف '#'
+    const hex = colorPicker.value.slice(1);
     hexInputField.value = hex.toUpperCase();
 });
