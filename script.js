@@ -46,6 +46,34 @@ function generateShades(rgb, count) {
     return shades;
 }
 
+// دانلود فایل به عنوان PNG
+function downloadPng(node) {
+    domtoimage.toPng(node)
+        .then(dataUrl => {
+            const link = document.createElement('a');
+            link.download = 'colors.png';
+            link.href = dataUrl;
+            link.click();
+        })
+        .catch(err => {
+            console.error('PNG download error:', err);
+        });
+}
+
+// دانلود فایل به عنوان SVG
+function downloadSvg(node) {
+    domtoimage.toSvg(node)
+        .then(dataUrl => {
+            const link = document.createElement('a');
+            link.download = 'colors.svg';
+            link.href = dataUrl;
+            link.click();
+        })
+        .catch(err => {
+            console.error('SVG download error:', err);
+        });
+}
+
 document.getElementById('colorForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -70,9 +98,12 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     const colorsContainer = document.getElementById('colorsContainer');
     colorsContainer.innerHTML = ''; // پاک کردن محتویات قبلی
 
-    // حالا برای هر رنگ یک کارت ایجاد می‌کنیم
-    // همچنین درجه رنگ (Color type) را بر اساس اندیس تعیین می‌کنیم.
-    // مثلاً هر رنگ 100 واحد بیشتر از قبلی، رنگ اول 100، دوم 200، سوم 300 و ...
+    // فعال کردن دکمه‌های دانلود
+    const downloadPngBtn = document.getElementById('downloadPngBtn');
+    const downloadSvgBtn = document.getElementById('downloadSvgBtn');
+    downloadPngBtn.style.display = 'inline-block';
+    downloadSvgBtn.style.display = 'inline-block';
+
     allColors.forEach((color, index) => {
         const scaleNumber = (index + 1) * 100;
 
@@ -97,4 +128,8 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
 
         colorsContainer.appendChild(card);
     });
+
+    // رویداد کلیک برای دکمه‌های دانلود
+    downloadPngBtn.onclick = () => downloadPng(colorsContainer);
+    downloadSvgBtn.onclick = () => downloadSvg(colorsContainer);
 });
