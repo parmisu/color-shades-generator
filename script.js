@@ -1,9 +1,7 @@
-// تابعی برای اعتبارسنجی کد HEX
 function isValidHex(hex) {
     return /^[0-9A-Fa-f]{6}$/.test(hex);
 }
 
-// تبدیل HEX به RGB
 function hexToRgb(hex) {
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
@@ -12,7 +10,6 @@ function hexToRgb(hex) {
     return { r, g, b };
 }
 
-// تبدیل RGB به HEX
 function rgbToHex(r, g, b) {
     return ((1 << 24) + (r << 16) + (g << 8) + b)
         .toString(16)
@@ -20,7 +17,6 @@ function rgbToHex(r, g, b) {
         .toUpperCase();
 }
 
-// تولید رنگ‌های روشن‌تر
 function generateTints(rgb, count) {
     const tints = [];
     for (let i = 1; i <= count; i++) {
@@ -33,7 +29,6 @@ function generateTints(rgb, count) {
     return tints.reverse();
 }
 
-// تولید رنگ‌های تیره‌تر
 function generateShades(rgb, count) {
     const shades = [];
     for (let i = 1; i <= count; i++) {
@@ -46,9 +41,9 @@ function generateShades(rgb, count) {
     return shades;
 }
 
-// دانلود به عنوان PNG
+// تغییر اصلی در این توابع است: استفاده از htmlToImage به جای domtoimage
 function downloadPng(node) {
-    domtoimage.toPng(node)
+    htmlToImage.toPng(node)
         .then(dataUrl => {
             const link = document.createElement('a');
             link.download = 'colors.png';
@@ -61,9 +56,8 @@ function downloadPng(node) {
         });
 }
 
-// دانلود به عنوان SVG
 function downloadSvg(node) {
-    domtoimage.toSvg(node)
+    htmlToImage.toSvg(node)
         .then(dataUrl => {
             const link = document.createElement('a');
             link.download = 'colors.svg';
@@ -76,7 +70,6 @@ function downloadSvg(node) {
         });
 }
 
-// رویداد ارسال فرم
 document.getElementById('colorForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -98,9 +91,8 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     const allColors = [...tints, baseHex, ...shades];
 
     const colorsContainer = document.getElementById('colorsContainer');
-    colorsContainer.innerHTML = ''; // پاک کردن قبلی
+    colorsContainer.innerHTML = '';
 
-    // فعال کردن دکمه‌های دانلود
     const downloadPngBtn = document.getElementById('downloadPngBtn');
     const downloadSvgBtn = document.getElementById('downloadSvgBtn');
     downloadPngBtn.style.display = 'inline-block';
@@ -131,12 +123,10 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
         colorsContainer.appendChild(card);
     });
 
-    // به‌روزرسانی بلوک نمایش رنگ انتخاب شده
     const colorPreview = document.getElementById('colorPreview');
     colorPreview.style.backgroundColor = `#${baseHex}`;
 });
 
-// هماهنگی بین ورودی متن HEX و پالت رنگی
 const hexInputField = document.getElementById('hexColor');
 const colorPicker = document.getElementById('colorPicker');
 const colorPreview = document.getElementById('colorPreview');
@@ -155,7 +145,7 @@ colorPicker.addEventListener('input', function() {
     colorPreview.style.backgroundColor = `#${hex.toUpperCase()}`;
 });
 
-// افزودن رویداد کلیک به دکمه‌های دانلود
+// اتصال دوباره رویداد کلیک برای دکمه‌های دانلود
 document.getElementById('downloadPngBtn').addEventListener('click', function() {
     const colorsContainer = document.getElementById('colorsContainer');
     downloadPng(colorsContainer);
