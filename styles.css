@@ -2,7 +2,7 @@
 
 /* تنظیم فونت عمومی به Vazirmatn */
 * {
-    font-family: 'Vazirmatn', sans-serif;
+    font-family: 'Noto Sans Arabic', sans-serif;
     box-sizing: border-box;
     direction: rtl;
     margin: 0;
