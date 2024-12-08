@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,7 @@
                     <div class="hex-input-wrapper">
                         <input type="text" id="hexColor" maxlength="6" required placeholder="مثلاً FF5733">
                         <input type="color" id="colorPicker" value="#FF5733" style="display: none;">
+                        <div class="color-preview" id="colorPreview"></div>
                         <label for="colorPicker" class="color-picker-icon" title="انتخاب رنگ">
                             <span class="material-icons">palette</span>
                         </label>
@@ -32,7 +33,7 @@
                 🌑 چندتا رنگ تیره‌تر میخوای؟
                 <input type="number" id="shades" min="1" max="10" value="5" required>
             </label>
-            <button type="submit">🤩 بسازش</button>
+            <button type="submit">بسازش 🤩</button>
         </form>
 
         <div class="buttons-container">
