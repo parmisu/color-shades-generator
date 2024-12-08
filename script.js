@@ -1,4 +1,4 @@
-// تابعی برای اطمینان از معتبر بودن کد HEX
+// تابعی برای اعتبارسنجی کد HEX
 function isValidHex(hex) {
     return /^[0-9A-Fa-f]{6}$/.test(hex);
 }
@@ -20,7 +20,7 @@ function rgbToHex(r, g, b) {
         .toUpperCase();
 }
 
-// تولید تانت
+// تولید تانت (روشن‌تر کردن رنگ)
 function generateTints(rgb, count) {
     const tints = [];
     for (let i = 1; i <= count; i++) {
@@ -30,10 +30,12 @@ function generateTints(rgb, count) {
         const b = Math.round(rgb.b + (255 - rgb.b) * factor);
         tints.push(rgbToHex(r, g, b));
     }
-    return tints;
+    // تانت‌ها در حالت فعلی از کم‌روشن به پر‌روشن هستند (اولی نزدیک به رنگ اصلی، آخری نزدیک به سفید)
+    // برای اینکه از روشن‌ترین شروع شود، آرایه را برعکس می‌کنیم.
+    return tints.reverse();
 }
 
-// تولید شید
+// تولید شید (تیره‌تر کردن رنگ)
 function generateShades(rgb, count) {
     const shades = [];
     for (let i = 1; i <= count; i++) {
@@ -43,6 +45,7 @@ function generateShades(rgb, count) {
         const b = Math.round(rgb.b * (1 - factor));
         shades.push(rgbToHex(r, g, b));
     }
+    // شیدها از نزدیک به رنگ اصلی تا تیره‌تر می‌روند، پس ترتیب‌شان مناسب است.
     return shades;
 }
 
@@ -64,44 +67,21 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     const tints = generateTints(rgb, tintsCount);
     const shades = generateShades(rgb, shadesCount);
 
+    // حالا ترتیب رنگ‌ها به این صورت است:
+    // تانت‌های روشن‌تر (از روشن به تیره‌تر)، سپس رنگ اصلی، سپس شید‌های تیره‌تر (از کم تیره به پر تیره)
+    const allColors = [...tints, baseHex, ...shades];
+
     const colorsContainer = document.getElementById('colorsContainer');
     colorsContainer.innerHTML = ''; // پاک کردن محتویات قبلی
 
-    // نمایش تانت‌ها
-    tints.forEach(tint => {
+    allColors.forEach(color => {
         const colorDiv = document.createElement('div');
         colorDiv.classList.add('color-item');
-        colorDiv.style.backgroundColor = `#${tint}`;
+        colorDiv.style.backgroundColor = `#${color}`;
 
         const codeSpan = document.createElement('span');
         codeSpan.classList.add('color-code');
-        codeSpan.textContent = `#${tint}`;
-
-        colorDiv.appendChild(codeSpan);
-        colorsContainer.appendChild(colorDiv);
-    });
-
-    // نمایش رنگ اصلی
-    const baseDiv = document.createElement('div');
-    baseDiv.classList.add('color-item');
-    baseDiv.style.backgroundColor = `#${baseHex}`;
-
-    const baseSpan = document.createElement('span');
-    baseSpan.classList.add('color-code');
-    baseSpan.textContent = `#${baseHex}`;
-
-    baseDiv.appendChild(baseSpan);
-    colorsContainer.appendChild(baseDiv);
-
-    // نمایش شید‌ها
-    shades.forEach(shade => {
-        const colorDiv = document.createElement('div');
-        colorDiv.classList.add('color-item');
-        colorDiv.style.backgroundColor = `#${shade}`;
-
-        const codeSpan = document.createElement('span');
-        codeSpan.classList.add('color-code');
-        codeSpan.textContent = `#${shade}`;
+        codeSpan.textContent = `#${color}`;
 
         colorDiv.appendChild(codeSpan);
         colorsContainer.appendChild(colorDiv);
