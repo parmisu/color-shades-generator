@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تولید کننده سایه‌ها و تینت‌های رنگ</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تولید تانت و شید رنگ</title>
+    <!-- لینک به فایل CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>تولید کننده سایه‌ها و تینت‌های رنگ</h1>
-    <label for="baseColor">کد رنگ پایه (HEX) را وارد کنید:</label>
-    <input type="text" id="baseColor" placeholder="مثال: 454545">
-    <label for="steps">تعداد سایه‌ها/تینت‌ها:</label>
-    <input type="number" id="steps" value="5" min="1" max="10">
-    <button id="generate">تولید رنگ‌ها</button>
+    <div class="container">
+        <h1>تولید تانت و شید رنگ</h1>
+        <form id="colorForm">
+            <label>
+                کد رنگ HEX (بدون #):
+                <input type="text" id="hexColor" maxlength="6" required placeholder="مثلاً FF5733">
+            </label>
+            <label>
+                تعداد تانت‌ها:
+                <input type="number" id="tints" min="1" max="10" value="5" required>
+            </label>
+            <label>
+                تعداد شید‌ها:
+                <input type="number" id="shades" min="1" max="10" value="5" required>
+            </label>
+            <button type="submit">تولید رنگ‌ها</button>
+        </form>
 
-    <h2>رنگ‌های تولید شده</h2>
-    <div id="colorDisplay"></div>
-  </div>
-  <script src="script.js" defer></script>
+        <div class="colors-container" id="colorsContainer">
+            <!-- رنگ‌های تولید شده در اینجا نمایش داده می‌شوند -->
+        </div>
+    </div>
+
+    <!-- لینک به فایل JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
