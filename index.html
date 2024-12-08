@@ -6,6 +6,8 @@
     <title>ابزار تولید طیف رنگی</title>
     <!-- لینک به فایل CSS -->
     <link rel="stylesheet" href="styles.css">
+    <!-- لینک به Google Fonts برای Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     <!-- Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -34,7 +36,7 @@
                 🌑 چندتا رنگ تیره‌تر میخوای؟
                 <input type="number" id="shades" min="1" max="10" value="5" required>
             </label>
-            <button type="submit">🤩 بسازش</button>
+            <button type="submit">بسازش 🤩</button>
         </form>
 
         <div class="buttons-container">
@@ -47,8 +49,8 @@
         </div>
     </div>
 
-    <!-- نسخه معتبر dom-to-image از dist -->
-    <script src="https://unpkg.com/html-to-image"></script>
+    <!-- کتابخانه html-to-image از CDN -->
+    <script src="https://unpkg.com/html-to-image@1.10.7/dist/html-to-image.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
