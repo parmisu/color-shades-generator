@@ -133,3 +133,21 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     downloadPngBtn.onclick = () => downloadPng(colorsContainer);
     downloadSvgBtn.onclick = () => downloadSvg(colorsContainer);
 });
+
+// هماهنگی بین ورودی متن HEX و پالت رنگی
+const hexInputField = document.getElementById('hexColor');
+const colorPicker = document.getElementById('colorPicker');
+
+// به‌روزرسانی پالت رنگی وقتی که HEX تغییر می‌کند
+hexInputField.addEventListener('input', function() {
+    const hex = hexInputField.value.trim();
+    if (isValidHex(hex)) {
+        colorPicker.value = `#${hex.toUpperCase()}`;
+    }
+});
+
+// به‌روزرسانی HEX وقتی که رنگ از پالت انتخاب می‌شود
+colorPicker.addEventListener('input', function() {
+    const hex = colorPicker.value.slice(1); // حذف '#'
+    hexInputField.value = hex.toUpperCase();
+});
