@@ -1,85 +1,109 @@
-// Function to generate tints and shades
-function generateColors(hex, steps) {
-  // Convert HEX to RGB
-  const baseColor = {
-    r: parseInt(hex.slice(0, 2), 16),
-    g: parseInt(hex.slice(2, 4), 16),
-    b: parseInt(hex.slice(4, 6), 16),
-  };
-
-  const colors = [];
-
-  // Generate Tints
-  for (let i = 1; i <= steps; i++) {
-    const factor = i / (steps + 1); // Prevent reaching pure white
-    colors.push({
-      type: "Tint",
-      color: adjustTint(baseColor, factor),
-    });
-  }
-
-  // Generate Shades
-  for (let i = 1; i <= steps; i++) {
-    const factor = i / (steps + 1); // Prevent reaching pure black
-    colors.push({
-      type: "Shade",
-      color: adjustShade(baseColor, factor),
-    });
-  }
-
-  return colors;
+// تابعی برای اطمینان از معتبر بودن کد HEX
+function isValidHex(hex) {
+    return /^[0-9A-Fa-f]{6}$/.test(hex);
 }
 
-// Adjust color for tints
-function adjustTint({ r, g, b }, factor) {
-  const newR = Math.round(r + (255 - r) * factor);
-  const newG = Math.round(g + (255 - g) * factor);
-  const newB = Math.round(b + (255 - b) * factor);
-  return rgbToHex(newR, newG, newB);
+// تبدیل HEX به RGB
+function hexToRgb(hex) {
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return { r, g, b };
 }
 
-// Adjust color for shades
-function adjustShade({ r, g, b }, factor) {
-  const newR = Math.round(r * (1 - factor));
-  const newG = Math.round(g * (1 - factor));
-  const newB = Math.round(b * (1 - factor));
-  return rgbToHex(newR, newG, newB);
-}
-
-// Convert RGB to HEX
+// تبدیل RGB به HEX
 function rgbToHex(r, g, b) {
-  return (
-    "#" +
-    [r, g, b]
-      .map((x) => x.toString(16).padStart(2, "0"))
-      .join("")
-  );
+    return ((1 << 24) + (r << 16) + (g << 8) + b)
+        .toString(16)
+        .slice(1)
+        .toUpperCase();
 }
 
-// Event listener for generating colors
-document.getElementById("generate").addEventListener("click", () => {
-  const baseColorInput = document.getElementById("baseColor").value.trim();
-  const steps = parseInt(document.getElementById("steps").value);
-  const colorDisplay = document.getElementById("colorDisplay");
+// تولید تانت
+function generateTints(rgb, count) {
+    const tints = [];
+    for (let i = 1; i <= count; i++) {
+        const factor = i / (count + 1);
+        const r = Math.round(rgb.r + (255 - rgb.r) * factor);
+        const g = Math.round(rgb.g + (255 - rgb.g) * factor);
+        const b = Math.round(rgb.b + (255 - rgb.b) * factor);
+        tints.push(rgbToHex(r, g, b));
+    }
+    return tints;
+}
 
-  // Validate base color
-  if (!/^([0-9A-Fa-f]{6})$/.test(baseColorInput)) {
-    alert("لطفاً یک کد رنگ معتبر (۶ رقمی) وارد کنید!");
-    return;
-  }
+// تولید شید
+function generateShades(rgb, count) {
+    const shades = [];
+    for (let i = 1; i <= count; i++) {
+        const factor = i / (count + 1);
+        const r = Math.round(rgb.r * (1 - factor));
+        const g = Math.round(rgb.g * (1 - factor));
+        const b = Math.round(rgb.b * (1 - factor));
+        shades.push(rgbToHex(r, g, b));
+    }
+    return shades;
+}
 
-  // Clear previous colors
-  colorDisplay.innerHTML = "";
+document.getElementById('colorForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-  // Generate colors
-  const colors = generateColors(baseColorInput, steps);
+    const hexInput = document.getElementById('hexColor').value.trim();
+    const tintsCount = parseInt(document.getElementById('tints').value);
+    const shadesCount = parseInt(document.getElementById('shades').value);
 
-  // Display colors
-  colors.forEach((item) => {
-    const div = document.createElement("div");
-    div.className = "color-box";
-    div.style.backgroundColor = item.color;
-    div.innerHTML = `<span>${item.type}: ${item.color}</span>`;
-    colorDisplay.appendChild(div);
-  });
+    if (!isValidHex(hexInput)) {
+        alert('لطفاً یک کد HEX معتبر وارد کنید (6 کاراکتر از 0-9 و A-F).');
+        return;
+    }
+
+    const rgb = hexToRgb(hexInput);
+    const baseHex = hexInput.toUpperCase();
+
+    const tints = generateTints(rgb, tintsCount);
+    const shades = generateShades(rgb, shadesCount);
+
+    const colorsContainer = document.getElementById('colorsContainer');
+    colorsContainer.innerHTML = ''; // پاک کردن محتویات قبلی
+
+    // نمایش تانت‌ها
+    tints.forEach(tint => {
+        const colorDiv = document.createElement('div');
+        colorDiv.classList.add('color-item');
+        colorDiv.style.backgroundColor = `#${tint}`;
+
+        const codeSpan = document.createElement('span');
+        codeSpan.classList.add('color-code');
+        codeSpan.textContent = `#${tint}`;
+
+        colorDiv.appendChild(codeSpan);
+        colorsContainer.appendChild(colorDiv);
+    });
+
+    // نمایش رنگ اصلی
+    const baseDiv = document.createElement('div');
+    baseDiv.classList.add('color-item');
+    baseDiv.style.backgroundColor = `#${baseHex}`;
+
+    const baseSpan = document.createElement('span');
+    baseSpan.classList.add('color-code');
+    baseSpan.textContent = `#${baseHex}`;
+
+    baseDiv.appendChild(baseSpan);
+    colorsContainer.appendChild(baseDiv);
+
+    // نمایش شید‌ها
+    shades.forEach(shade => {
+        const colorDiv = document.createElement('div');
+        colorDiv.classList.add('color-item');
+        colorDiv.style.backgroundColor = `#${shade}`;
+
+        const codeSpan = document.createElement('span');
+        codeSpan.classList.add('color-code');
+        codeSpan.textContent = `#${shade}`;
+
+        colorDiv.appendChild(codeSpan);
+        colorsContainer.appendChild(colorDiv);
+    });
 });
