@@ -103,6 +103,7 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
 
         const colorBox = document.createElement('div');
         colorBox.classList.add('color-box');
+        // اعمال رنگ روی لایه داخلی رنگ با pseudo-element انجام می‌شود.
         colorBox.style.backgroundColor = `#${color}`;
 
         const colorType = document.createElement('p');
