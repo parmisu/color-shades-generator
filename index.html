@@ -11,14 +11,19 @@
         <h1>تولید تینت و شید رنگ</h1>
         <form id="colorForm">
             <div class="input-group">
-                <label>
+                <label class="hex-label">
                     کد رنگ HEX (بدون #):
                     <input type="text" id="hexColor" maxlength="6" required placeholder="مثلاً FF5733">
                 </label>
-                <label>
-                    انتخاب رنگ:
-                    <input type="color" id="colorPicker" value="#FF5733">
-                </label>
+                <div class="color-picker-container">
+                    <input type="color" id="colorPicker" value="#FF5733" style="display: none;">
+                    <label for="colorPicker" class="color-picker-label" title="انتخاب رنگ">
+                        <!-- SVG آیکون پالت رنگی -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#555" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 5.5a2.5 2.5 0 0 1 0 5z"/>
+                        </svg>
+                    </label>
+                </div>
             </div>
             <label>
                 تعداد تینت‌ها:
