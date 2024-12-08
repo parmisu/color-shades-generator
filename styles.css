@@ -1,7 +1,8 @@
+/* حذف فونت قبلی و اعمال فونت Vazirmatn از Google Fonts */
+
 @font-face {
-    font-family: 'IRANSansX-Bold';
-    src: url('fonts/IRANSansX-Bold.woff2') format('woff2'),
-         url('fonts/IRANSansX-Bold.woff') format('woff');
+    font-family: 'Vazirmatn';
+    src: url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
     font-weight: normal;
     font-style: normal;
 }
@@ -17,7 +18,7 @@
 }
 
 * {
-    font-family: 'IRANSansX-Bold', sans-serif;
+    font-family: 'Vazirmatn', sans-serif;
     box-sizing: border-box;
     direction: rtl;
     margin: 0;
