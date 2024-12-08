@@ -25,10 +25,18 @@
             <button type="submit">✍ تولید کن</button>
         </form>
 
+        <div class="buttons-container" style="margin-top:20px; display:flex; gap:10px;">
+            <button id="downloadPngBtn" style="display:none;">دانلود PNG</button>
+            <button id="downloadSvgBtn" style="display:none;">دانلود SVG</button>
+        </div>
+
         <div class="colors-container" id="colorsContainer">
-            <!-- رنگ‌های تولید شده در قالب کارت نمایش داده می‌شوند -->
+            <!-- رنگ‌های تولید شده به صورت کارت در اینجا نمایش داده می‌شوند -->
         </div>
     </div>
+    
+    <!-- اضافه کردن کتابخانه dom-to-image از CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/src/dom-to-image.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
