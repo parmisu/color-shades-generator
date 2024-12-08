@@ -1,9 +1,7 @@
-// تابعی برای اعتبارسنجی کد HEX
 function isValidHex(hex) {
     return /^[0-9A-Fa-f]{6}$/.test(hex);
 }
 
-// تبدیل HEX به RGB
 function hexToRgb(hex) {
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
@@ -12,7 +10,6 @@ function hexToRgb(hex) {
     return { r, g, b };
 }
 
-// تبدیل RGB به HEX
 function rgbToHex(r, g, b) {
     return ((1 << 24) + (r << 16) + (g << 8) + b)
         .toString(16)
@@ -20,7 +17,6 @@ function rgbToHex(r, g, b) {
         .toUpperCase();
 }
 
-// تولید رنگ‌های روشن‌تر
 function generateTints(rgb, count) {
     const tints = [];
     for (let i = 1; i <= count; i++) {
@@ -33,7 +29,6 @@ function generateTints(rgb, count) {
     return tints.reverse();
 }
 
-// تولید رنگ‌های تیره‌تر
 function generateShades(rgb, count) {
     const shades = [];
     for (let i = 1; i <= count; i++) {
@@ -46,48 +41,35 @@ function generateShades(rgb, count) {
     return shades;
 }
 
-// دانلود به عنوان PNG با استفاده از html-to-image
+// استفاده از domtoimage (کتابخانه dom-to-image-more)
 function downloadPng(node) {
-    htmlToImage.toPng(node, {
-        style: {
-            transform: 'scale(1)', // اطمینان از عدم تغییر مقیاس
-            'transform-origin': 'top left',
-        },
-        backgroundColor: '#fff', // تنظیم پس‌زمینه سفید برای PNG
-    })
-    .then(function (dataUrl) {
-        const link = document.createElement('a');
-        link.download = 'colors.png';
-        link.href = dataUrl;
-        link.click();
-    })
-    .catch(function (error) {
-        console.error('PNG download error:', error);
-        alert('مشکلی در دانلود PNG پیش آمد. لطفاً دوباره تلاش کنید.');
-    });
+    domtoimage.toPng(node)
+        .then(function (dataUrl) {
+            const link = document.createElement('a');
+            link.download = 'colors.png';
+            link.href = dataUrl;
+            link.click();
+        })
+        .catch(function (error) {
+            console.error('PNG download error:', error);
+            alert('مشکلی در دانلود PNG پیش آمد. لطفاً دوباره تلاش کنید.');
+        });
 }
 
-// دانلود به عنوان SVG با استفاده از html-to-image
 function downloadSvg(node) {
-    htmlToImage.toSvg(node, {
-        style: {
-            transform: 'scale(1)',
-            'transform-origin': 'top left',
-        },
-    })
-    .then(function (dataUrl) {
-        const link = document.createElement('a');
-        link.download = 'colors.svg';
-        link.href = dataUrl;
-        link.click();
-    })
-    .catch(function (error) {
-        console.error('SVG download error:', error);
-        alert('مشکلی در دانلود SVG پیش آمد. لطفاً دوباره تلاش کنید.');
-    });
+    domtoimage.toSvg(node)
+        .then(function (dataUrl) {
+            const link = document.createElement('a');
+            link.download = 'colors.svg';
+            link.href = dataUrl;
+            link.click();
+        })
+        .catch(function (error) {
+            console.error('SVG download error:', error);
+            alert('مشکلی در دانلود SVG پیش آمد. لطفاً دوباره تلاش کنید.');
+        });
 }
 
-// رویداد ارسال فرم
 document.getElementById('colorForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -109,9 +91,8 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     const allColors = [...tints, baseHex, ...shades];
 
     const colorsContainer = document.getElementById('colorsContainer');
-    colorsContainer.innerHTML = ''; // پاک کردن قبلی
+    colorsContainer.innerHTML = '';
 
-    // فعال کردن دکمه‌های دانلود
     const downloadPngBtn = document.getElementById('downloadPngBtn');
     const downloadSvgBtn = document.getElementById('downloadSvgBtn');
     downloadPngBtn.style.display = 'inline-block';
@@ -146,7 +127,6 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     colorPreview.style.backgroundColor = `#${baseHex}`;
 });
 
-// هماهنگی بین ورودی متن HEX و پالت رنگی
 const hexInputField = document.getElementById('hexColor');
 const colorPicker = document.getElementById('colorPicker');
 const colorPreview = document.getElementById('colorPreview');
@@ -165,15 +145,14 @@ colorPicker.addEventListener('input', function() {
     colorPreview.style.backgroundColor = `#${hex.toUpperCase()}`;
 });
 
-// اتصال رویداد کلیک به دکمه‌های دانلود
 document.getElementById('downloadPngBtn').addEventListener('click', function() {
-    console.log('Download PNG button clicked');
+    console.log("PNG button clicked");
     const colorsContainer = document.getElementById('colorsContainer');
     downloadPng(colorsContainer);
 });
 
 document.getElementById('downloadSvgBtn').addEventListener('click', function() {
-    console.log('Download SVG button clicked');
+    console.log("SVG button clicked");
     const colorsContainer = document.getElementById('colorsContainer');
     downloadSvg(colorsContainer);
 });
