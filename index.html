@@ -3,51 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تولید تانت و شید رنگ</title>
-    <!-- لینک به فایل CSS -->
+    <title>ابزار تولید طیف رنگی</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- لینک به Google Material Icons -->
+    <!-- Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>تولید تینت و شید رنگ</h1>
+        <h1>ابزار تولید طیف رنگی</h1>
         <form id="colorForm">
             <div class="input-group">
                 <label class="hex-label">
-                    کد رنگ HEX (بدون #):
-                    <input type="text" id="hexColor" maxlength="6" required placeholder="مثلاً FF5733">
+                    کد رنگ HEX (بدون #) رو اینجا بنویس:
+                    <div class="hex-input-wrapper">
+                        <input type="text" id="hexColor" maxlength="6" required placeholder="مثلاً FF5733">
+                        <input type="color" id="colorPicker" value="#FF5733" style="display: none;">
+                        <label for="colorPicker" class="color-picker-icon" title="انتخاب رنگ">
+                            <span class="material-icons">palette</span>
+                        </label>
+                    </div>
                 </label>
-                <div class="color-picker-container">
-                    <input type="color" id="colorPicker" value="#FF5733" style="display: none;">
-                    <label for="colorPicker" class="color-picker-label" title="انتخاب رنگ">
-                        <!-- آیکون پالت رنگی از Google Material Icons -->
-                        <span class="material-icons">palette</span>
-                    </label>
-                </div>
             </div>
             <label>
-                تعداد تینت‌ها:
+                🌤️ چندتا رنگ روشن‌تر میخوای؟
                 <input type="number" id="tints" min="1" max="10" value="5" required>
             </label>
             <label>
-                تعداد شید‌ها:
+                🌑 چندتا رنگ تیره‌تر میخوای؟
                 <input type="number" id="shades" min="1" max="10" value="5" required>
             </label>
-            <button type="submit">✍ تولید کن</button>
+            <button type="submit">🤩 بسازش</button>
         </form>
 
         <div class="buttons-container">
-            <button id="downloadPngBtn" style="display:none;">دانلود PNG</button>
-            <button id="downloadSvgBtn" style="display:none;">دانلود SVG</button>
+            <button id="downloadPngBtn" style="display:none;">📥 دانلود PNG</button>
+            <button id="downloadSvgBtn" style="display:none;">📥 دانلود SVG</button>
         </div>
 
         <div class="colors-container" id="colorsContainer">
-            <!-- رنگ‌های تولید شده به صورت کارت در اینجا نمایش داده می‌شوند -->
+            <!-- رنگ‌های تولید شده در اینجا نمایش داده می‌شوند -->
         </div>
     </div>
-    
-    <!-- اضافه کردن کتابخانه dom-to-image از CDN -->
+
     <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/src/dom-to-image.min.js"></script>
     <script src="script.js"></script>
 </body>
