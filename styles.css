@@ -1,11 +1,14 @@
 /* حذف فونت قبلی و اعمال فونت Vazirmatn از Google Fonts */
 
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-    font-weight: normal;
-    font-style: normal;
+/* تنظیم فونت عمومی به Vazirmatn */
+* {
+    font-family: 'Vazirmatn', sans-serif;
+    box-sizing: border-box;
+    direction: rtl;
+    margin: 0;
+    padding: 0;
 }
+
 
 /* متغیرهای فاصله‌گذاری بر پایه 8px */
 :root {
