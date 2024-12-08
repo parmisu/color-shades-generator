@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Color Shades and Tints</title>
-  <!-- اتصال فایل CSS -->
+  <title>تولید کننده سایه‌ها و تینت‌های رنگ</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>Color Shades and Tints Generator</h1>
-    <label for="baseColor">Enter Base Color (HEX):</label>
-    <input type="text" id="baseColor" placeholder="e.g., 454545">
-    <label for="steps">Number of Shades/Tints:</label>
+    <h1>تولید کننده سایه‌ها و تینت‌های رنگ</h1>
+    <label for="baseColor">کد رنگ پایه (HEX) را وارد کنید:</label>
+    <input type="text" id="baseColor" placeholder="مثال: 454545">
+    <label for="steps">تعداد سایه‌ها/تینت‌ها:</label>
     <input type="number" id="steps" value="5" min="1" max="10">
-    <button id="generate">Generate Colors</button>
+    <button id="generate">تولید رنگ‌ها</button>
 
-    <h2>Generated Colors</h2>
+    <h2>رنگ‌های تولید شده</h2>
     <div id="colorDisplay"></div>
   </div>
-  <!-- اتصال فایل JavaScript -->
   <script src="script.js" defer></script>
 </body>
 </html>
