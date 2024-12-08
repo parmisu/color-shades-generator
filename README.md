@@ -22,6 +22,7 @@ https://amirmasoudabi.github.io/color-shades-generator/
 
 پس از اعمال تنظیمات طیف‌های رنگی را نمایش می‌دهد.
 در صورت نیاز، می‌توانید کد رنگ‌ها را کپی کرده و در پروژه‌های خود استفاده کنید.
+
 ![image](https://github.com/user-attachments/assets/1d50125c-8fbc-42b0-a5ab-e1cb6172b469)
 ![image](https://github.com/user-attachments/assets/f226485d-308f-43c7-bd9c-90dd126e0601)
 
