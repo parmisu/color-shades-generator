@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'IRANSansX-Bold';
-  src: 
+  src: url('./fonts/IRANSansX-Bold.woff2') format('woff2'),
        url('./fonts/IRANSansX-Bold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
