@@ -182,12 +182,11 @@ button:hover {
     position: relative;
 }
 
-.color-box::before {
-    content: "";
+.color-box-inner {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: inherit;
+    background: inherit; /* inherit می‌کند از color-box */
 }
 
 .color-type {
