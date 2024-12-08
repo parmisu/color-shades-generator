@@ -127,6 +127,10 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
         colorBox.classList.add('color-box');
         colorBox.style.backgroundColor = `#${color}`;
 
+        const innerBox = document.createElement('div');
+        innerBox.classList.add('color-box-inner');
+        colorBox.appendChild(innerBox);
+
         const colorType = document.createElement('p');
         colorType.classList.add('color-type');
         colorType.textContent = scaleNumber;
