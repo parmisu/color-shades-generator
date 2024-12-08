@@ -30,8 +30,6 @@ function generateTints(rgb, count) {
         const b = Math.round(rgb.b + (255 - rgb.b) * factor);
         tints.push(rgbToHex(r, g, b));
     }
-    // تانت‌ها در حالت فعلی از کم‌روشن به پر‌روشن هستند (اولی نزدیک به رنگ اصلی، آخری نزدیک به سفید)
-    // برای اینکه از روشن‌ترین شروع شود، آرایه را برعکس می‌کنیم.
     return tints.reverse();
 }
 
@@ -45,7 +43,6 @@ function generateShades(rgb, count) {
         const b = Math.round(rgb.b * (1 - factor));
         shades.push(rgbToHex(r, g, b));
     }
-    // شیدها از نزدیک به رنگ اصلی تا تیره‌تر می‌روند، پس ترتیب‌شان مناسب است.
     return shades;
 }
 
@@ -67,23 +64,37 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     const tints = generateTints(rgb, tintsCount);
     const shades = generateShades(rgb, shadesCount);
 
-    // حالا ترتیب رنگ‌ها به این صورت است:
-    // تانت‌های روشن‌تر (از روشن به تیره‌تر)، سپس رنگ اصلی، سپس شید‌های تیره‌تر (از کم تیره به پر تیره)
+    // ترتیب: تانت‌های روشن -> رنگ اصلی -> شیدهای تیره
     const allColors = [...tints, baseHex, ...shades];
 
     const colorsContainer = document.getElementById('colorsContainer');
     colorsContainer.innerHTML = ''; // پاک کردن محتویات قبلی
 
-    allColors.forEach(color => {
-        const colorDiv = document.createElement('div');
-        colorDiv.classList.add('color-item');
-        colorDiv.style.backgroundColor = `#${color}`;
+    // حالا برای هر رنگ یک کارت ایجاد می‌کنیم
+    // همچنین درجه رنگ (Color type) را بر اساس اندیس تعیین می‌کنیم.
+    // مثلاً هر رنگ 100 واحد بیشتر از قبلی، رنگ اول 100، دوم 200، سوم 300 و ...
+    allColors.forEach((color, index) => {
+        const scaleNumber = (index + 1) * 100;
 
-        const codeSpan = document.createElement('span');
-        codeSpan.classList.add('color-code');
-        codeSpan.textContent = `#${color}`;
+        const card = document.createElement('div');
+        card.classList.add('color-card');
 
-        colorDiv.appendChild(codeSpan);
-        colorsContainer.appendChild(colorDiv);
+        const colorBox = document.createElement('div');
+        colorBox.classList.add('color-box');
+        colorBox.style.backgroundColor = `#${color}`;
+
+        const colorType = document.createElement('p');
+        colorType.classList.add('color-type');
+        colorType.textContent = scaleNumber; // درج عدد درجه رنگ
+
+        const colorCode = document.createElement('p');
+        colorCode.classList.add('color-code');
+        colorCode.textContent = `#${color}`; // درج کد رنگ
+
+        card.appendChild(colorBox);
+        card.appendChild(colorType);
+        card.appendChild(colorCode);
+
+        colorsContainer.appendChild(card);
     });
 });
