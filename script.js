@@ -1,9 +1,7 @@
-// تابعی برای اعتبارسنجی کد HEX
 function isValidHex(hex) {
     return /^[0-9A-Fa-f]{6}$/.test(hex);
 }
 
-// تبدیل HEX به RGB
 function hexToRgb(hex) {
     const bigint = parseInt(hex, 16);
     const r = (bigint >> 16) & 255;
@@ -12,7 +10,6 @@ function hexToRgb(hex) {
     return { r, g, b };
 }
 
-// تبدیل RGB به HEX
 function rgbToHex(r, g, b) {
     return ((1 << 24) + (r << 16) + (g << 8) + b)
         .toString(16)
@@ -20,7 +17,6 @@ function rgbToHex(r, g, b) {
         .toUpperCase();
 }
 
-// تولید تانت (روشن‌تر کردن رنگ)
 function generateTints(rgb, count) {
     const tints = [];
     for (let i = 1; i <= count; i++) {
@@ -33,7 +29,6 @@ function generateTints(rgb, count) {
     return tints.reverse();
 }
 
-// تولید شید (تیره‌تر کردن رنگ)
 function generateShades(rgb, count) {
     const shades = [];
     for (let i = 1; i <= count; i++) {
@@ -46,7 +41,6 @@ function generateShades(rgb, count) {
     return shades;
 }
 
-// دانلود فایل به عنوان PNG
 function downloadPng(node) {
     domtoimage.toPng(node)
         .then(dataUrl => {
@@ -60,7 +54,6 @@ function downloadPng(node) {
         });
 }
 
-// دانلود فایل به عنوان SVG
 function downloadSvg(node) {
     domtoimage.toSvg(node)
         .then(dataUrl => {
@@ -92,13 +85,11 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
     const tints = generateTints(rgb, tintsCount);
     const shades = generateShades(rgb, shadesCount);
 
-    // ترتیب: تانت‌های روشن -> رنگ اصلی -> شیدهای تیره
     const allColors = [...tints, baseHex, ...shades];
 
     const colorsContainer = document.getElementById('colorsContainer');
-    colorsContainer.innerHTML = ''; // پاک کردن محتویات قبلی
+    colorsContainer.innerHTML = '';
 
-    // فعال کردن دکمه‌های دانلود
     const downloadPngBtn = document.getElementById('downloadPngBtn');
     const downloadSvgBtn = document.getElementById('downloadSvgBtn');
     downloadPngBtn.style.display = 'inline-block';
@@ -116,11 +107,11 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
 
         const colorType = document.createElement('p');
         colorType.classList.add('color-type');
-        colorType.textContent = scaleNumber; // درج عدد درجه رنگ
+        colorType.textContent = scaleNumber;
 
         const colorCode = document.createElement('p');
         colorCode.classList.add('color-code');
-        colorCode.textContent = `#${color}`; // درج کد رنگ
+        colorCode.textContent = `#${color}`;
 
         card.appendChild(colorBox);
         card.appendChild(colorType);
@@ -128,24 +119,22 @@ document.getElementById('colorForm').addEventListener('submit', function(e) {
 
         colorsContainer.appendChild(card);
     });
-
-    // رویداد کلیک برای دکمه‌های دانلود
-    downloadPngBtn.onclick = () => downloadPng(colorsContainer);
-    downloadSvgBtn.onclick = () => downloadSvg(colorsContainer);
 });
 
-// هماهنگی بین ورودی متن HEX و پالت رنگی
 const hexInputField = document.getElementById('hexColor');
 const colorPicker = document.getElementById('colorPicker');
+const colorPreview = document.getElementById('colorPreview');
 
 hexInputField.addEventListener('input', function() {
     const hex = hexInputField.value.trim();
     if (isValidHex(hex)) {
         colorPicker.value = `#${hex.toUpperCase()}`;
+        colorPreview.style.backgroundColor = `#${hex.toUpperCase()}`;
     }
 });
 
 colorPicker.addEventListener('input', function() {
     const hex = colorPicker.value.slice(1);
     hexInputField.value = hex.toUpperCase();
+    colorPreview.style.backgroundColor = `#${hex.toUpperCase()}`;
 });
