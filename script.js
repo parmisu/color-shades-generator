@@ -167,11 +167,13 @@ colorPicker.addEventListener('input', function() {
 
 // اتصال رویداد کلیک به دکمه‌های دانلود
 document.getElementById('downloadPngBtn').addEventListener('click', function() {
+    console.log('Download PNG button clicked');
     const colorsContainer = document.getElementById('colorsContainer');
     downloadPng(colorsContainer);
 });
 
 document.getElementById('downloadSvgBtn').addEventListener('click', function() {
+    console.log('Download SVG button clicked');
     const colorsContainer = document.getElementById('colorsContainer');
     downloadSvg(colorsContainer);
 });
