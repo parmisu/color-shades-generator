@@ -6,7 +6,7 @@
     font-style: normal;
 }
 
-/* متغیرهای فاصله‌گذاری بر پایه 8px */
+/* فاصله ها بر مبنای 8px */
 :root {
     --space-8: 8px;
     --space-16: 16px;
@@ -74,11 +74,10 @@ form {
     padding: var(--space-8);
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: var(--space-4, 4px);
-    padding-right: 80px; /* فضا برای آیکون و بلوک رنگ */
+    border-radius: var(--space-8);
+    padding-right: 80px; 
 }
 
-/* بلوک نمایش رنگ انتخاب شده */
 .color-preview {
     position: absolute;
     top: 50%;
@@ -90,7 +89,6 @@ form {
     border: 1px solid #ccc;
 }
 
-/* آیکون پالت رنگ */
 .color-picker-icon {
     position: absolute;
     top: 50%;
@@ -122,7 +120,7 @@ input[type="number"] {
     padding: var(--space-8);
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: var(--space-4, 4px);
+    border-radius: var(--space-8);
 }
 
 button {
@@ -131,7 +129,7 @@ button {
     background-color: #007BFF;
     color: #fff;
     border: none;
-    border-radius: var(--space-4, 4px);
+    border-radius: var(--space-8);
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
@@ -153,7 +151,7 @@ button:hover {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
-/* کارت‌های رنگی */
+/* کارت های رنگی */
 .color-card {
     background-color: #000; 
     border-radius: var(--space-8);
@@ -166,11 +164,23 @@ button:hover {
     gap: var(--space-8);
 }
 
+/* برای ایجاد یک باکس مربع بدون aspect-ratio */
 .color-box {
     width: 100%;
-    aspect-ratio: 1/1;
+    height: 0;
+    padding-bottom: 100%;
     background-color: #fff;
     border-radius: var(--space-8);
+    position: relative;
+}
+
+/* ایجاد یک لایه داخلی برای رنگ */
+.color-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
 }
 
 .color-type {
@@ -197,6 +207,6 @@ button:hover {
     }
 
     .hex-input-wrapper input[type="text"] {
-        padding-right: 72px; /* کمی کمتر برای موبایل */
+        padding-right: 72px;
     }
 }
