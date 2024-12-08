@@ -64,6 +64,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'IRANSansX-Bold', sans-serif;
 }
 
 button:hover {
@@ -77,6 +78,7 @@ button:hover {
     gap: 20px;
 }
 
+/* استایل کارت‌ها */
 .color-card {
     background-color: #000; /* پس‌زمینه کارت مشکی */
     border-radius: 10px;
@@ -90,11 +92,10 @@ button:hover {
 
 .color-box {
     width: 100%;
-    aspect-ratio: 1/1; /* مربع */
+    aspect-ratio: 1/1; /* نسبت 1:1 برای یک مربع کامل */
     background-color: #fff;
     border-radius: 8px;
     margin-bottom: 10px;
-    /* رنگ داخل آن با جاوااسکریپت اعمال می‌شود */
 }
 
 .color-type {
@@ -109,7 +110,6 @@ button:hover {
     margin: 0;
 }
 
-/* ریسپانسیو */
 @media (max-width: 600px) {
     .color-type {
         font-size: 14px;
