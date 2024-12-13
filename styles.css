@@ -158,6 +158,10 @@ button:hover {
     display: grid;
     gap: var(--space-16);
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    width: 800px;
+    height: 600px;
+
+
 }
 
 /* کارت‌های رنگی */
